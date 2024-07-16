@@ -1,13 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import {
-  Package2Icon,
-  HomeIcon,
-  ShoppingCartIcon,
-  PackageIcon,
-  UsersIcon,
-  LineChartIcon,
-} from "lucide-react";
+import { Package2Icon, HomeIcon, PackageIcon } from "lucide-react";
 const NavBar = () => {
   return (
     <nav className="grid gap-6 text-lg font-medium">

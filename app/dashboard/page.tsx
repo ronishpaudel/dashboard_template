@@ -35,16 +35,7 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import {
-  HomeIcon,
-  LineChartIcon,
-  Package2Icon,
-  PackageIcon,
-  PanelLeftIcon,
-  SearchIcon,
-  ShoppingCartIcon,
-  UsersIcon,
-} from "lucide-react";
+import { PanelLeftIcon } from "lucide-react";
 import { SideNavBar } from "../component/side-nabar";
 import NavBar from "../component/navbar";
 

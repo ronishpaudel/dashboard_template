@@ -4,15 +4,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import {
-  Package2Icon,
-  HomeIcon,
-  ShoppingCartIcon,
-  PackageIcon,
-  UsersIcon,
-  LineChartIcon,
-  SettingsIcon,
-} from "lucide-react";
+import { Package2Icon, HomeIcon, PackageIcon } from "lucide-react";
 import React from "react";
 import Link from "next/link";
 

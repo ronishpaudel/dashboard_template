@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Dashboard",
-  description: "Connect with Dashboard of HEALTH RIXSS for updating newsletter",
+  description: "Connect with Dashboard Template for Ecommerce Store",
 };
 
 export default function RootLayout({

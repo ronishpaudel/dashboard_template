@@ -1,5 +1,7 @@
 "use client";
 
+import { ThemeProvider } from "../component/theme-provider";
+
 export default function DashboardLayout({
   children,
 }: {
@@ -7,7 +9,14 @@ export default function DashboardLayout({
 }) {
   return (
     <>
-      <div className="flex h-screen ">{children}</div>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <div className="flex h-screen ">{children}</div>
+      </ThemeProvider>
     </>
   );
 }

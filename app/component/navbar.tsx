@@ -22,7 +22,7 @@ const NavBar = () => {
       </Link>
 
       <Link
-        href="/dahsboard/add-product"
+        href="/dashboard/add-product"
         className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
         prefetch={false}
       >

@@ -4,7 +4,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Package2Icon, HomeIcon, PackageIcon } from "lucide-react";
+import {
+  Package2Icon,
+  HomeIcon,
+  PackageIcon,
+  LayoutDashboard,
+} from "lucide-react";
 import React from "react";
 import Link from "next/link";
 
@@ -46,6 +51,19 @@ const SideNavBar = () => {
               </Link>
             </TooltipTrigger>
             <TooltipContent side="right">Products</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                href="/dashboard/category"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                prefetch={false}
+              >
+                <LayoutDashboard className="h-5 w-5" />
+                <span className="sr-only">Category</span>
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent side="right">Category</TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </nav>

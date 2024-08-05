@@ -158,7 +158,7 @@ const Page = () => {
                         ["link", "image", "blockquote"],
                         ["alignLeft", "alignCenter", "alignRight"],
                       ]}
-                      className="border-gray-300 border rounded p-1"
+                      className="border-gray-300 border rounded p-1 dark:bg-darkBg"
                     />
                     {errors.description && (
                       <p className="text-red-400 text-[12px]">

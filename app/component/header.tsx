@@ -16,7 +16,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu"; // Use your custom DropdownMenu components here
+} from "@/components/ui/dropdown-menu";
 import { PanelLeftIcon } from "lucide-react";
 import React from "react";
 import NavBar from "./navbar";

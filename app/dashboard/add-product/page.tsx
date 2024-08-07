@@ -9,6 +9,7 @@ import { useDropzone } from "react-dropzone";
 import { SideNavBar } from "@/app/component/side-nabar";
 import Header from "@/app/component/header";
 import { RichTextEditor } from "@mantine/rte";
+import { FeaturedProduct } from "@/app/component/featureBtn";
 
 interface IFormValues {
   productName: string;
@@ -16,7 +17,6 @@ interface IFormValues {
   sellingPrice: number;
   crossedPrice?: number;
   quantity: number;
-  productSku: number;
   productImages: File[];
   categories: string;
   variant: string;
@@ -31,7 +31,6 @@ const schema = z
     sellingPrice: z.number().min(1),
     crossedPrice: z.number().optional(),
     quantity: z.number().min(1),
-    productSku: z.number().min(1),
     productImages: z.array(z.instanceof(File)),
     categories: z.string().min(2).max(20),
     variant: z.string().min(2).max(20),
@@ -158,7 +157,7 @@ const Page = () => {
                         ["link", "image", "blockquote"],
                         ["alignLeft", "alignCenter", "alignRight"],
                       ]}
-                      className="border-gray-300 border rounded p-1 dark:bg-darkBg"
+                      className="border-gray-300 border rounded p-1 dark:bg-darkBg dark:text-white"
                     />
                     {errors.description && (
                       <p className="text-red-400 text-[12px]">
@@ -201,15 +200,6 @@ const Page = () => {
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <label>Product SKU</label>
-                    <input
-                      type="number"
-                      {...register("productSku", { required: true })}
-                      className="border-gray-300 border rounded p-1"
-                    />
-                  </div>
-
-                  <div className="flex flex-col gap-2">
                     <label>
                       Status <span className="text-red-500">*</span>
                     </label>
@@ -227,6 +217,8 @@ const Page = () => {
                     )}
                   </div>
                 </div>
+
+                <FeaturedProduct />
               </div>
 
               <div className="flex flex-col gap-4 w-full sm:w-[50%]">
@@ -338,7 +330,7 @@ const Page = () => {
             <div className="flex justify-end mt-4">
               <button
                 type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded"
+                className="bg-orange-500 text-white px-4 py-2 rounded"
               >
                 Submit
               </button>

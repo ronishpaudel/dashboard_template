@@ -10,10 +10,9 @@ const Home: React.FC = () => {
   const handleLoginFailure = () => {
     console.error("Login Failed");
   };
-
-  const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string;
+  console.log(process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!);
   return (
-    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
       <div className="flex flex-col items-center justify-center w-full h-[100vh]">
         <h1 className="text-2xl font-bold dark:text-white">
           Sign in to your account

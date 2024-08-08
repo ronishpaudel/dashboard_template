@@ -10,6 +10,7 @@ import { SideNavBar } from "@/app/component/side-nabar";
 import Header from "@/app/component/header";
 import { RichTextEditor } from "@mantine/rte";
 import { FeaturedProduct } from "@/app/component/featureBtn";
+import withAuth from "@/utils/withAuth";
 
 interface IFormValues {
   productName: string;
@@ -342,4 +343,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default withAuth(Page);

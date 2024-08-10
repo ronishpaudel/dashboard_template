@@ -1,32 +1,43 @@
-"use client";
 import { useMutation } from "@tanstack/react-query";
 import { API } from "../../api/API";
 import { useRouter } from "next/navigation";
 
-const authenticateUser = async (token: string) => {
-  const response = await API.post(
-    "/auth/google/callback",
-    { token },
-    { withCredentials: true }
-  );
-  return response.data;
-};
+interface AuthResponse {
+  user: {
+    id: string;
+    email: string;
+    name: string;
+    profilePic: string;
+  };
+  hasUsername: boolean;
+}
 
-const useAuth = () => {
-  const router = useRouter();
-
-  const login = useMutation({
-    mutationFn: authenticateUser,
-    onSuccess: (data) => {
-      console.log("User data:", data);
-      router.push("/dashboard");
-    },
-    onError: (error) => {
-      console.error("Login failed:", error);
-    },
+const loginWithGoogle = async (token: string): Promise<AuthResponse> => {
+  const response = await API.post("/auth/registration", {
+    token,
   });
 
-  return login;
+  if (!response) {
+    throw new Error("Failed to create user");
+  }
+
+  return response.data;
+};
+const useGoogleLogin = () => {
+  const { push } = useRouter();
+  return useMutation({
+    mutationFn: loginWithGoogle,
+    onSuccess: (data, variables) => {
+      console.log("Success:", data);
+      console.log("Success token:", variables);
+      localStorage.setItem("token", variables);
+      push("/dashboard"); // Navigate to dashboard
+    },
+
+    onError: (error) => {
+      console.error("Error:", error);
+    },
+  });
 };
 
-export default useAuth;
+export { useGoogleLogin };

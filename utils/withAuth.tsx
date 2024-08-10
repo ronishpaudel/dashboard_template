@@ -1,23 +1,22 @@
 "use client";
-import React, { ComponentType, useEffect } from "react";
+import React, { ComponentType, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
-interface WithAuthProps {
-  isAuthenticated: boolean;
-}
 
 const withAuth = <P extends object>(
   WrappedComponent: ComponentType<P>
-): React.FC<P & WithAuthProps> => {
-  const ComponentWithAuth = (props: P & WithAuthProps) => {
-    const { isAuthenticated } = props;
+): React.FC<P> => {
+  const ComponentWithAuth = (props: P) => {
     const router = useRouter();
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
     useEffect(() => {
-      if (!isAuthenticated) {
+      const token = localStorage.getItem("token");
+      if (!token) {
         router.push("/");
+      } else {
+        setIsAuthenticated(true);
       }
-    }, [isAuthenticated, router]);
+    }, [router]);
 
     if (!isAuthenticated) {
       return null;

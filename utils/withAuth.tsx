@@ -1,24 +1,27 @@
 "use client";
 import React, { ComponentType, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSnapshot } from "valtio";
+import { authStore } from "./authStore";
 
 const withAuth = <P extends object>(
   WrappedComponent: ComponentType<P>
 ): React.FC<P> => {
   const ComponentWithAuth = (props: P) => {
     const router = useRouter();
-    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+
+    const { loggedIn } = useSnapshot(authStore);
 
     useEffect(() => {
       const token = localStorage.getItem("token");
       if (!token) {
         router.push("/");
       } else {
-        setIsAuthenticated(true);
+        authStore.setLoggedIn();
       }
     }, [router]);
 
-    if (!isAuthenticated) {
+    if (!loggedIn) {
       return null;
     }
 

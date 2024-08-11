@@ -21,8 +21,24 @@ import { PanelLeftIcon } from "lucide-react";
 import React from "react";
 import NavBar from "./navbar";
 import { ModeToggle } from "./toggleBtn";
+import { useRouter } from "next/navigation";
+import { useUserInfo } from "./hooks/getHooks/useUserInfo";
+import { authStore } from "@/utils/authStore";
 
 const Header = () => {
+  const { push } = useRouter();
+  const { data } = useUserInfo();
+
+  function handleOnClick() {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      localStorage.removeItem("token");
+      authStore.setLogOut();
+      push("/");
+    }
+  }
+
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
       <Sheet>
@@ -61,7 +77,7 @@ const Header = () => {
             className="overflow-hidden rounded-full"
           >
             <img
-              src="/images/batman.png"
+              src={data?.profilePic}
               width={36}
               height={36}
               alt="Avatar"
@@ -72,10 +88,12 @@ const Header = () => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => push("/dashboard/acc-setting")}>
+            Settings
+          </DropdownMenuItem>
           <DropdownMenuItem>Support</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Logout</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleOnClick}>Logout</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>

@@ -1,4 +1,7 @@
+// Page.tsx
+
 "use client";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
@@ -6,10 +9,36 @@ import { ArrowLeft, MailOpenIcon, UserIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useUserInfo } from "@/app/component/hooks/getHooks/useUserInfo";
 import { Loading } from "@/app/loading";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/utils/firebase";
 
 export default function Page() {
   const { push } = useRouter();
-  const { data, isLoading, isError } = useUserInfo();
+  const { data, isLoading, isError, refetch } = useUserInfo();
+
+  useEffect(() => {
+    // Listener for authentication state changes
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        // User is signed in, refetch user info
+        try {
+          // Refresh the token to ensure it's not expired
+          const token = await currentUser.getIdToken(true);
+          localStorage.setItem("token", token);
+          refetch();
+        } catch (error) {
+          console.error("Failed to refresh token:", error);
+          // Optionally handle the error (e.g., redirect to login)
+        }
+      } else {
+        // User is signed out
+        localStorage.removeItem("token");
+      }
+    });
+
+    return () => unsubscribe();
+  }, [refetch]);
 
   if (isLoading) {
     return (

@@ -12,33 +12,11 @@ import { Loading } from "@/app/loading";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/utils/firebase";
+import withAuth from "@/utils/withAuth";
 
-export default function Page() {
+function Page() {
   const { push } = useRouter();
-  const { data, isLoading, isError, refetch } = useUserInfo();
-
-  useEffect(() => {
-    // Listener for authentication state changes
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        // User is signed in, refetch user info
-        try {
-          // Refresh the token to ensure it's not expired
-          const token = await currentUser.getIdToken(true);
-          localStorage.setItem("token", token);
-          refetch();
-        } catch (error) {
-          console.error("Failed to refresh token:", error);
-          // Optionally handle the error (e.g., redirect to login)
-        }
-      } else {
-        // User is signed out
-        localStorage.removeItem("token");
-      }
-    });
-
-    return () => unsubscribe();
-  }, [refetch]);
+  const { data, isLoading, isError } = useUserInfo();
 
   if (isLoading) {
     return (
@@ -105,3 +83,5 @@ export default function Page() {
     </div>
   );
 }
+
+export default withAuth(Page);

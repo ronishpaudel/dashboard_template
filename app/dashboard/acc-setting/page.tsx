@@ -7,7 +7,7 @@ import { ArrowLeft, MailOpenIcon, UserIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useUserInfo } from "@/app/component/hooks/getHooks/useUserInfo";
 import { Loading } from "@/app/loading";
-import withAuth from "@/utils/withAuth";
+import { withAuth } from "@/utils/withAuth";
 
 function Page() {
   const { push } = useRouter();

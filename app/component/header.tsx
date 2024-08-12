@@ -24,7 +24,7 @@ import { ModeToggle } from "./toggleBtn";
 import { useRouter } from "next/navigation";
 import { useUserInfo } from "./hooks/getHooks/useUserInfo";
 import { authStore } from "@/utils/authStore";
-import withAuth from "@/utils/withAuth";
+import { withAuth } from "@/utils/withAuth";
 
 const Header = () => {
   const { push } = useRouter();

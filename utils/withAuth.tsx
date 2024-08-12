@@ -53,4 +53,4 @@ const withAuth = <P extends object>(
   return ComponentWithAuth;
 };
 
-export default withAuth;
+export { withAuth };

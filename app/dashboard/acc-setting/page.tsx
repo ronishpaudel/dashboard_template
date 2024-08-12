@@ -1,5 +1,3 @@
-// Page.tsx
-
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,9 +7,6 @@ import { ArrowLeft, MailOpenIcon, UserIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useUserInfo } from "@/app/component/hooks/getHooks/useUserInfo";
 import { Loading } from "@/app/loading";
-import { useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/utils/firebase";
 import withAuth from "@/utils/withAuth";
 
 function Page() {

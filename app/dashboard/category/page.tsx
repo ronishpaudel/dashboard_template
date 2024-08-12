@@ -15,7 +15,7 @@ import { SideNavBar } from "@/app/component/side-nabar";
 import Header from "@/app/component/header";
 import { useRouter } from "next/navigation";
 import { CategoryDialog } from "@/app/component/categoryDialog";
-import withAuth from "@/utils/withAuth";
+import { withAuth } from "@/utils/withAuth";
 
 const Page = () => {
   const { back } = useRouter();

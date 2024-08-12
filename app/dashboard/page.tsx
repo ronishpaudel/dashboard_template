@@ -2,7 +2,7 @@
 import { SideNavBar } from "../component/side-nabar";
 import Header from "../component/header";
 import { Main } from "../component/main";
-import withAuth from "@/utils/withAuth";
+import { withAuth } from "@/utils/withAuth";
 
 function page() {
   return (

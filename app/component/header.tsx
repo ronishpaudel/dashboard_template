@@ -18,14 +18,12 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { PanelLeftIcon } from "lucide-react";
-import React, { useEffect } from "react";
+import React from "react";
 import NavBar from "./navbar";
 import { ModeToggle } from "./toggleBtn";
 import { useRouter } from "next/navigation";
 import { useUserInfo } from "./hooks/getHooks/useUserInfo";
 import { authStore } from "@/utils/authStore";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/utils/firebase";
 import withAuth from "@/utils/withAuth";
 
 const Header = () => {

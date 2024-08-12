@@ -5,6 +5,7 @@ import { useSnapshot } from "valtio";
 import { authStore } from "./authStore";
 import { auth } from "@/utils/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import Loading from "@/app/loading";
 
 const withAuth = <P extends object>(
   WrappedComponent: ComponentType<P>
@@ -40,11 +41,11 @@ const withAuth = <P extends object>(
     }, [router]);
 
     if (loading) {
-      return <div>Loading...</div>;
+      return <Loading />;
     }
 
     if (!loggedIn) {
-      return <div>Access denied. Redirecting...</div>;
+      return <Loading />;
     }
 
     return <WrappedComponent {...props} />;

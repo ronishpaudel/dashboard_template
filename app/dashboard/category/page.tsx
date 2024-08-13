@@ -1,7 +1,6 @@
 "use client";
-import React, { useState } from "react";
-
-import { ArrowLeft, Trash2 } from "lucide-react";
+import React from "react";
+import { XIcon } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -13,25 +12,31 @@ import {
 } from "@/components/ui/table";
 import { SideNavBar } from "@/app/component/side-nabar";
 import Header from "@/app/component/header";
-import { useRouter } from "next/navigation";
 import { CategoryDialog } from "@/app/component/categoryDialog";
 import { withAuth } from "@/utils/withAuth";
+import { useCategoryQuery } from "@/app/component/hooks/getHooks/useCategoryQuery";
+import { Button } from "@/components/ui/button";
+import Loading from "@/app/loading";
+import { useDeleteCategory } from "@/app/component/hooks/postHooks/useDeleteCategory";
 
 const Page = () => {
-  const { back } = useRouter();
-  // Dummy data
-  const [data, setData] = useState([
-    {
-      id: "1",
-      name: "Technology",
-    },
-    { id: "2", name: "Life Style" },
-  ]);
+  const { data: categories, isLoading, isError } = useCategoryQuery();
+  const { mutate } = useDeleteCategory({ onSuccess() {}, onError() {} });
 
-  const handleDeleteRow = (id: string) => {
-    setData(data.filter((item) => item.id !== id));
+  if (isLoading) {
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return <div>Error loading categories</div>;
+  }
+  const handleOnClick = (id: number) => {
+    mutate(id);
   };
-
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <SideNavBar />
@@ -42,31 +47,40 @@ const Page = () => {
             <div className="flex items-center gap-2">
               <div className="text-[18px] font-semibold">Store Categories</div>
             </div>
-
             <CategoryDialog />
           </div>
-          <Table className="rounded-[10px]">
-            <TableCaption>A list of your categories.</TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Name</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {data.map((row, index) => (
-                <TableRow key={index}>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>
-                    <Trash2
-                      className="text-red-400 cursor-pointer w-[20px]"
-                      onClick={() => handleDeleteRow(row.id)}
-                    />
-                  </TableCell>
+          <div className="border rounded-lg overflow-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Category</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {categories?.map((category) => (
+                  <TableRow key={category.id}>
+                    <TableCell className="font-medium">
+                      {category.name}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <Button
+                        size="icon"
+                        variant="destructive"
+                        className="h-6 w-6"
+                      >
+                        <XIcon
+                          className="h-4 w-4"
+                          onClick={() => handleOnClick(category.id)}
+                        />
+                        <span className="sr-only">Delete</span>
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </main>
       </div>
     </div>

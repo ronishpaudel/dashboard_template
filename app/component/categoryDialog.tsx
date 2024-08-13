@@ -16,7 +16,7 @@ import { useQueryClient } from "@tanstack/react-query";
 export function CategoryDialog() {
   const [data, setData] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
-  const queryClient = useQueryClient();
+
   const { mutate, isPending } = useCreateCategory({
     onSuccess: () => {
       setIsOpen(false);

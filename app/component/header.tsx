@@ -78,7 +78,7 @@ const Header = () => {
             className="overflow-hidden rounded-full"
           >
             <img
-              src={data?.profilePic}
+              src={data?.profilePic || "/public/images/batman.png"}
               width={36}
               height={36}
               alt="Avatar"

@@ -11,7 +11,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCreateCategory } from "./hooks/postHooks/useCreateCategory";
 import { useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
 
 export function CategoryDialog() {
   const [data, setData] = useState<string>("");

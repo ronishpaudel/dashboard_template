@@ -5,7 +5,6 @@ import {
 } from "@tanstack/react-query";
 import { API } from "../../api/API";
 import { Product } from "@/utils/type";
-import { cache } from "react";
 
 const fetchProducts = async (context: QueryFunctionContext) => {
   const queryVal = context.queryKey[1] as string;

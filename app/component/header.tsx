@@ -28,7 +28,7 @@ import { withAuth } from "@/utils/withAuth";
 
 const Header = () => {
   const { push } = useRouter();
-  const { data, refetch } = useUserInfo();
+  const { data } = useUserInfo();
 
   function handleOnClick() {
     const token = localStorage.getItem("token");

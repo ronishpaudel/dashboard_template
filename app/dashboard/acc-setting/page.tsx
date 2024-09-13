@@ -51,7 +51,6 @@ function Page() {
               src={user.profilePic || "/placeholder-user.jpg"}
               alt="User Avatar"
             />
-            <AvatarFallback>?</AvatarFallback>
           </Avatar>
           <div className="text-center">
             <h2 className="text-2xl font-bold mb-1">{user.name}</h2>

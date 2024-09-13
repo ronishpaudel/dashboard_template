@@ -1,6 +1,7 @@
 "use client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
+import SignIn from "./component/Signin";
 import { OAuth } from "./component/oAuth";
 
 const Home: React.FC = () => {

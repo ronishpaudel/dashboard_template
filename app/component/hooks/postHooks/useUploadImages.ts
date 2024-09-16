@@ -1,17 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { API } from "../../api/API";
 
-export interface UploadResponse {
-  message: string;
-  files: File[];
-}
-
-interface UploadError {
-  message: string;
-}
-
-// Function to handle image upload
-const uploadImages = async (formData: FormData): Promise<UploadResponse> => {
+const uploadImage = async (formData: FormData) => {
   const response = await API.post("/upload", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
@@ -20,15 +10,16 @@ const uploadImages = async (formData: FormData): Promise<UploadResponse> => {
   return response.data;
 };
 
-// Custom hook to use the upload mutation
-export const useImageUpload = () => {
-  return useMutation<UploadResponse, UploadError, FormData>({
-    mutationFn: uploadImages,
-    onError: (error: UploadError) => {
-      console.error("Error uploading images:", error.message);
+export const useUploadImage = () => {
+  return useMutation({
+    mutationFn: uploadImage,
+    onSuccess: (data) => {
+      console.log("Image uploaded successfully:", data);
+      // handle success logic
     },
-    onSuccess: (data: UploadResponse) => {
-      console.log("Images uploaded successfully:", data.files);
+    onError: (error) => {
+      console.error("Error uploading image:", error);
+      // handle error logic
     },
   });
 };
